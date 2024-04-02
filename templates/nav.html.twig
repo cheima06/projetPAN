@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   
-  <a class="navbar-brand p-2" href="{{path('app_home')}}">Home</a>
+  <a class="navbar-brand p-2" href="{{path('app_home')}}">Accueil</a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -10,11 +10,11 @@
     <ul class="navbar-nav mr-auto">
       
       <li class="nav-item active">
-        <a class="nav-link" href="{#{path('app_article_index')}#}">Nos articles </a>
+        <a class="nav-link" href="{#{path('app_article_index')}#}">Articles </a>
       </li>
   
       <li class="nav-item">
-        <a class="nav-link" href="{#{path('app_contact')}#}">Contact</a>
+        <a class="nav-link" href="{{path('app_contact')}}">Contact</a>
       </li>
       
 
@@ -44,7 +44,7 @@
 
     <form action="{#{path('app_search_articles')}#}" class="form-inline my-2 my-lg-0 d-flex">
       <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
     </form>
 
   </div>

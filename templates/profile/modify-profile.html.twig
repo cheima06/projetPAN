@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de l'utilisateur{% endblock %}
+
+{% form_theme profileForm 'bootstrap_5_layout.html.twig' %}
+
+
+{% block body %}
+
+<div class="row col-md-10">
+
+    {{form_start(profileForm, {'attr':{'class':'row','novalidate':'novalidate'}} )}}
+
+        {{form_row(profileForm.name,{'row_attr':{'class':'col-md-6'}})}}
+        {{form_row(profileForm.firstName,{'row_attr':{'class':'col-md-6'}})}}
+        
+        {{form_row(profileForm.adresse,{'row_attr':{'class':'col-md-6'}})}}
+        {{form_row(profileForm.postalCode,{'row_attr':{'class':'col-md-6'}})}}
+        
+        {{form_row(profileForm._token)}}
+
+    <button type='submit' class='btn btn-info mt-5'>Modifier profil</button>
+    {# {render_rest:  veut dire n'affiche pas le reste des autres champs dans mon formulaire #}
+    {{form_end(profileForm, {render_rest:false })}}
+
+</div>
+
+{% endblock %}

@@ -5,15 +5,18 @@
 {% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
+
+    {% include "flash.html.twig" %}
+
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1 class="row justify-content-center">Inscription</h1>
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, { 'attr': {'class': 'row', 'novalidate': 'novalidate'} }) }}
 
         {{ form_row(registrationForm.name) }}
         {{ form_row(registrationForm.firstName) }}
@@ -27,6 +30,8 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-success">Register</button>
+        <button type="submit" class="btn btn-success">enregistrer</button>
+
     {{ form_end(registrationForm) }}
+
 {% endblock %}
