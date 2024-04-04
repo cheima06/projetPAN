@@ -17,7 +17,9 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm, { 'attr': {'class': 'row', 'novalidate': 'novalidate'} }) }}
-
+    
+    <div class="row justify-content-center">
+    <div class="col-md-6">
         {{ form_row(registrationForm.name) }}
         {{ form_row(registrationForm.firstName) }}
        
@@ -29,9 +31,10 @@
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn btn-success">enregistrer</button>
-
+   
+        <button type="submit" class="btn btn-secondary ">enregistrer</button>
+    </div> 
+    </div>
     {{ form_end(registrationForm) }}
 
 {% endblock %}

@@ -8,6 +8,22 @@
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" href="{#{path('app_contact')}#}">A propos de nous</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{#{path('app_contact')}#}">Nos services</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{#{path('app_contact')}#}">Portfolio/Avis</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{#{path('app_contact')}#}">Evenements</a>
+      </li>
       
       <li class="nav-item active">
         <a class="nav-link" href="{#{path('app_article_index')}#}">Articles </a>
@@ -42,10 +58,10 @@
       
     </ul>
 
-    <form action="{#{path('app_search_articles')}#}" class="form-inline my-2 my-lg-0 d-flex">
+    {#<form action="{{path('app_search_articles')}}" class="form-inline my-2 my-lg-0 d-flex">
       <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
-    </form>
+    </form>#}
 
   </div>
 </nav>

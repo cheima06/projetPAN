@@ -27,40 +27,50 @@ class ContactType extends AbstractType
                 // 'data' => 'abcdef',
                 //'required'   => false,
                 'empty_data' => 'John Doe',
-                'row_attr' => ['class' => 'col-md-6', 'id' => '...'],
+                'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
             ])
             ->add('name', TextType::class, [
-                'label' => 'nom',
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Votre nom'
                 ],
-                'row_attr' => ['class' => 'col-md-6', 'id' => '...'],
+                'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
 
                 ])
                 ->add('Email', TextType::class, [
-                    'label' => 'email',
+                    'label' => 'Email',
                     'attr' => [
                         'placeholder' => 'Votre email'
                     ],
-                    'row_attr' => ['class' => 'col-md-6', 'id' => '...'],
+                    'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
     
                     ])
-            ->add('object', ChoiceType::class, [
-                'label' => 'Sélectionnez un motif',
-                'placeholder' => 'Veuillez choisir une valeur par défaut',
-                    'choices'  => [
+                ->add('PhoneNumber', TextType::class, [
+                        'label' => 'Numero de telephone',
+                        'attr' => [
+                            'placeholder' => 'Votre numero de telephone'
+                        ],
+                        ])
+                ->add('object', TextType::class, [
+                'label' => 'Objet',
+                'attr' => [
+                    'placeholder' => 'Objet'
+                ],
+                'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
+                    /*'choices'  => [
                         'Je souhaite devenir formateur' => 'Je souhaite devenir formateur',
                         'Je souhaite devenir développeur' => 'Je souhaite devenir développeur',
                         'Je souhaite entrer en contact' => 'Je souhaite entrer en contact',
                     ],
                     'choice_attr' => [
                         'Veuillez choisir une valeur par défaut' => ['disabled' => true]
-                    ],
+                    ],*/
+                    'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
                 ])
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
                 'attr'=>[
-                    'placeholder'=>'votre message'
+                    'placeholder'=>'Votre message'
                 ]
 
                     // 'mapped' => false
