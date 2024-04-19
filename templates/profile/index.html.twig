@@ -7,9 +7,17 @@
   {#% include "flash.html.twig" %#} 
 
 
- <h3>Mon profil</h3>
+ <h3 class="row justify-content-center">Mon profil</h3>
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-6 row justify-content-center">
+        {% if app.user.sexe == 'masculin' %}
+          <img class=" img-fluid w-50 h-50 m-5" src="{{ asset('build/images/homme.png')}}" >
+        {% elseif app.user.sexe == 'feminin' %}
+          <img class=" img-fluid w-50 " src="{{ asset('build/images/femme.png')}}" >
+        {% endif %}
+
+      </div>
+      <div class="col-md-6 p-5">
         <table class="table ">
           <tbody >
             <tr>
