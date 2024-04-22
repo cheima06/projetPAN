@@ -15,4 +15,14 @@ class EventController extends AbstractController
             'controller_name' => 'EventController',
         ]);
     }
+
+    #[Route('/event/{id}', name: 'show_event')]
+    public function show($id): Response
+    {
+
+        return $this->render('event/show.html.twig', [
+            'id' => $id,
+            
+        ]);
+    }
 }
