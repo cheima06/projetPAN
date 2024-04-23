@@ -22,7 +22,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{path('app_event')}}">Evenements</a>
+        <a class="nav-link" href="{{path('app_event_index')}}">Evenements</a>
       </li>
       
       <li class="nav-item active">
@@ -34,7 +34,7 @@
       </li>
       
 
-      {#% if is_granted('ROLE_USER') %#}
+      {% if is_granted('ROLE_USER') %}
 
         <li class="nav-item">
           <a class="nav-link" href="{{path('app_profile')}}">Profile</a>
@@ -44,7 +44,7 @@
           <a class="nav-link" href="{{path('app_logout')}}">Deconnexion</a>
         </li>
 
-      {#% else %#}
+      {% else %}
 
         <li class="nav-item">
           <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
@@ -54,7 +54,7 @@
           <a class="nav-link" href="{{path('app_register')}}">S'inscrire</a>
         </li>
    
-      {#% endif %#}
+      {% endif %}
       
     </ul>
 

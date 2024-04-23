@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    {#{ form_widget(form) }#}
+     {{ form_row(form.name, {'label': 'Nom'}) }}
+     {{ form_row(form.picture, {'label': 'Image'}) }}
+     {{ form_row(form.description, {'label': 'Description'}) }}
+     {{ form_row(form.startAt, {'label': 'Debut'}) }}
+     {{ form_row(form.endAt, {'label': 'Fin'}) }}
+
+     {{ form_row(form.price, {'label': 'prix'}) }}
+
+    <br>
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    
+{{ form_end(form) }}

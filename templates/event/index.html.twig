@@ -1,18 +1,125 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EventController!{% endblock %}
+{% block title %}Event index{% endblock %}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
+    <h1 class="d-flex justify-content-center">Nos évenements</h1>
 
 
-liste evenement
+
+    <div class="col-md-10 border d-flex px-2">
+
+        {#% include "flash.html.twig" %#}
+        
+          {#}  {% for event in events %}
+            <div class="row align-items-center">
+                <a href="{{ path('app_event_show', {id : event.id })}}"></a>
+
+                <div class="d-flex justify-content-center p-3">
+
+                    {% if event.picture is empty%}
+                        <img class="col-md-2" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
+                    {% else %}
+                        <img class="col-md-2" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
+                    {% endif %}
+
+                    <div class="col-md-2 d-flex flex-column ms-3">
+                        <h3>{{event.name}}</h3>
+                        <p>{{ event.startAt ? event.startAt|date('Y-m-d H:i:s') : '' }}</p>
+                        <p>{{ event.endAt ? event.endAt|date('Y-m-d H:i:s') : '' }}</p>
 
 
+                        <a class="btn btn-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
+                        
+                        {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
+                            <a class="btn btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                        {% endif %}
+                        
+                    </div> 
+
+                </div>
+                
+            </div>
+            {% endfor %}#}
+
+
+        {% for event in events %}
+            <div class="card col-md-4 m-4" style="width: 18rem;">
+                {% if event.picture is empty%}
+                    <img class="" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
+                {% else %}
+                    <img class="" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
+                {% endif %}
+            <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p>{{ event.startAt ? event.startAt|date('d-m-Y H:i') : '' }}</p>
+            <p>{{ event.endAt ? event.endAt|date('d-m-Y H:i') : '' }}</p>
+            <p class="card-text">{{event.price}} €</p>
+            <a class="btn btn-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
+            <a class="btn btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+            <a class="btn btn-danger" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>
+            </div>
+            </div>
+
+        {% endfor %}
+
+
+
+    
+  {#</div>
 </div>
+        
+
+
+            <div class="navigation col-md-8">
+                {#{ knp_pagination_render(events) }
+            </div> #}
+
+ 
+    
+    </div> 
+
+            <div class="row justify-content-center">
+                <a class="my-5 col-md-2 btn btn-primary" href="{{ path('app_event_new') }}">Créer nouveau</a>
+            </div>
+
+
+
+{#}
+    <table class="table">
+        <thead>
+            <tr>
+                {#<th>Id</th>
+                <th>Nom</th>
+                <th>image</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr class="col-6">
+                {#<td>{{ event.id }}</td>
+                <td>{{ event.name }}</td>
+                <td>{{ event.picture }}</td>
+                <td>{{ event.startAt ? event.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.endAt ? event.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.price }}</td>   
+            </tr>
+
+            <a class="btn btn-outline-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
+            <a class="btn btn-outline-info" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+       
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun résultat trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-info" href="{{ path('app_event_new') }}">Créer un nouvel evenement</a>{#}
+   
 {% endblock %}
