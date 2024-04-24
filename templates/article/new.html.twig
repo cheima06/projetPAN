@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+
+{% block body %}
+    <h1>Create new Article</h1>
+    
+    {#% include "flash.html.twig" %#}
+
+    {{ include('article/_form.html.twig') }}
+
+    <a class="btn btn-secondary" href="{{ path('app_article_index') }}">retour à la liste</a>
+{% endblock %}

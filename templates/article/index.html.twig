@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1 class="p-3">Article index</h1>
+
+    <div class="col-10 border">
+
+        {#% include "flash.html.twig" %#}
+
+            {% for article in articles %}
+
+                <a href="{{ path('app_article_show', {id : article.id })}}"></a>
+
+                <div class="d-flex article p-3">
+
+                    {% if article.photo is empty%}
+                        <img class="col-md-3" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{article.titre}}" titre="{{article.titre}}">
+                    {% else %}
+                        <img class="col-md-3" src="{{ asset('/uploads/articles/' ~ article.photo)}}" alt="{{article.titre}}" title="{{article.titre}}">
+                    {% endif %}
+
+                    <div class="col-md-2 d-flex flex-column ms-3">
+                        <h3>{{article.titre}}</h3>
+                        <p>{{article.description}}</p>
+
+                        <a class="btn btn-info" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+                        
+                        {#% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %#}
+                            <a class="btn btn-warning" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+                        {#% endif %#}
+                        
+                    </div> 
+
+                </div>
+                
+
+            {% endfor %}
+
+                <div class="navigation col-md-8">
+                    {#{ knp_pagination_render(articles) }#}
+                </div>
+
+                <div class="row justify-content-center">
+                    <a class="my-5 col-md-2 btn btn-primary" href="{{ path('app_article_new') }}">Creer</a>
+                </div> 
+                
+
+    </div>
+{% endblock %}

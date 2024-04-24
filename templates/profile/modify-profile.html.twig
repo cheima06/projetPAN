@@ -13,6 +13,11 @@
 
         {{form_row(profileForm.name,{'row_attr':{'class':'col-md-6'}})}}
         {{form_row(profileForm.firstName,{'row_attr':{'class':'col-md-6'}})}}
+
+        {{form_row(profileForm.sexe,{'row_attr':{'class':'col-md-6'}})}}
+        {{form_row(profileForm.email,{'row_attr':{'class':'col-md-6'}})}}
+
+
         
         {{form_row(profileForm.adresse,{'row_attr':{'class':'col-md-6'}})}}
         {{form_row(profileForm.postalCode,{'row_attr':{'class':'col-md-6'}})}}
@@ -20,6 +25,7 @@
         {{form_row(profileForm._token)}}
 
     <button type='submit' class='btn btn-info mt-5'>Modifier profil</button>
+    
     {# {render_rest:  veut dire n'affiche pas le reste des autres champs dans mon formulaire #}
     {{form_end(profileForm, {render_rest:false })}}
 
