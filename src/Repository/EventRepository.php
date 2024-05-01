@@ -45,4 +45,15 @@ class EventRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findEventsBySearch($search):array {
+
+        return $this->createQueryBuilder('e')
+           ->Where('e.description LIKE :search')
+           ->orWhere('e.titre LIKE :search')
+            ->setParameter('search', "%" .$search . "%")
+            ->getQuery()
+            ->getResult()
+        ;
+
+}
 }

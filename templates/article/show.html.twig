@@ -25,16 +25,16 @@
 
     <a class="btn btn-info" href="{{ path('app_article_index') }}">Retour à la liste</a>
 
-     {#% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %#}
+     {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
 
-    <a class="btn btn-primary" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-    {{ include('article/_delete_form.html.twig') }}
-    {#% endif %#}
+        <a class="btn btn-primary" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+        {{ include('article/_delete_form.html.twig') }}
+    {% endif %}
 
 
-    {#{{ include('commentaire/show.html.twig') }}#}
+    {#{ include('commentaire/show.html.twig') }}
 
-    {#% if app.user is not null %}
+    {% if app.user is not null %}
         {{ include('commentaire/index.html.twig') }}
     {% endif %#}
 

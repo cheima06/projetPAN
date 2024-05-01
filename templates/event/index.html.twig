@@ -5,7 +5,13 @@
 
 {% block body %}
     <h1 class="d-flex justify-content-center">Nos évenements</h1>
-
+        <div class="col-4">
+            <h3 class="p-3">Rechercher un evenement</h3>
+            <form action="{{path('app_search_event')}}" class="form-inline my-2 my-lg-0 d-flex">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
+            </form>
+        </div>
 
 
     <div class="col-md-10 border d-flex px-2">
@@ -56,33 +62,41 @@
             <p>{{ event.startAt ? event.startAt|date('d-m-Y H:i') : '' }}</p>
             <p>{{ event.endAt ? event.endAt|date('d-m-Y H:i') : '' }}</p>
             <p class="card-text">{{event.price}} €</p>
+
             <a class="btn btn-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
+        {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
             <a class="btn btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-            <a class="btn btn-danger" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>
+            <a class="btn btn-danger" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>    
+        {% endif %}
+           
+
             </div>
             </div>
 
         {% endfor %}
 
-
+   </div> 
 
     
   {#</div>
-</div>
+</div>#}
         
 
 
             <div class="navigation col-md-8">
-                {#{ knp_pagination_render(events) }
-            </div> #}
+                {{ knp_pagination_render(events) }}
+            </div> 
 
  
     
-    </div> 
-
-            <div class="row justify-content-center">
+ 
+            {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
+                <div class="row justify-content-center">
                 <a class="my-5 col-md-2 btn btn-primary" href="{{ path('app_event_new') }}">Créer nouveau</a>
-            </div>
+                </div>           
+
+            {% endif %}
+      
 
 
 

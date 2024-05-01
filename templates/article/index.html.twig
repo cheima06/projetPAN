@@ -3,10 +3,18 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1 class="p-3">Article index</h1>
+   
 
     <div class="col-10 border">
+        <div class="col-4">
+            <h3 class="p-3">Rechercher un article</h3>
+            <form action="{{path('app_search_articles')}}" class="form-inline my-2 my-lg-0 d-flex">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
+            </form>
+        </div>
 
+    <h1 class="p-3">Nos derniers articles</h1>
         {#% include "flash.html.twig" %#}
 
             {% for article in articles %}
@@ -23,13 +31,14 @@
 
                     <div class="col-md-2 d-flex flex-column ms-3">
                         <h3>{{article.titre}}</h3>
-                        <p>{{article.description}}</p>
+                        {#<p>{{article.description}}</p>#}
 
-                        <a class="btn btn-info" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+                        <a class="btn btn-info" href="{{path('app_article_show', {'id': article.id}) }}">Voir</a>
                         
-                        {#% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %#}
+                        {% if app.user and "ROLE_ADMIN"
+                         in app.user.getroles()  %}
                             <a class="btn btn-warning" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-                        {#% endif %#}
+                        {% endif %}
                         
                     </div> 
 
@@ -39,13 +48,20 @@
             {% endfor %}
 
                 <div class="navigation col-md-8">
-                    {#{ knp_pagination_render(articles) }#}
+                    {{ knp_pagination_render(articles) }}
                 </div>
 
+            {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
+                            
                 <div class="row justify-content-center">
                     <a class="my-5 col-md-2 btn btn-primary" href="{{ path('app_article_new') }}">Creer</a>
                 </div> 
                 
+            {% endif %}
+
+
+
+
 
     </div>
 {% endblock %}
