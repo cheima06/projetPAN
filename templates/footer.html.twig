@@ -1,6 +1,9 @@
-<div class="row fixed-bottom  bg-grey-light justify-content-center pt-5 border-top">
+<link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    <div class="col mb-3">
+<div class="row   bg-grey-light justify-content-center pt-5 border-top">
+
+
+    {#<div class="col mb-3">
       <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
       </a>
@@ -40,4 +43,36 @@
 
       </ul>
     </div>
-  </footer>
+  </footer>#}
+
+
+
+
+
+  <div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{{path('app_home')}}" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+        <li class="nav-item"><a href="{{path('app_prestation')}}" class="nav-link px-2 text-body-secondary">Nos services</a></li>
+        <li class="nav-item"><a href="{{path('app_event_index')}}" class="nav-link px-2 text-body-secondary">Evenements</a></li>
+        <li class="nav-item"><a href="{{path('app_article_index')}}" class="nav-link px-2 text-body-secondary">Articles</a></li>
+        <li class="nav-item"><a href="{{path('app_contact')}}" class="nav-link px-2 text-body-secondary">Contact</a></li>
+        <li class="nav-item"><a href="{{path('app_cgu')}}" class="nav-link px-2 text-body-secondary">CGU</a></li>
+      </ul>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul>
+
+      <p class="text-center text-body-secondary">PAN © 2024 made with  
+      {#<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill color-red" viewBox="0 0 16 16">
+  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+</svg>#}
+    <img height="25" src="{{ asset('build/images/coeur.png')}}" >
+
+ by chaima </p>
+
+    </footer>
+  </div>
