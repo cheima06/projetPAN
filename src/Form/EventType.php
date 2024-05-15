@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EventType extends AbstractType
 {
@@ -14,7 +16,21 @@ class EventType extends AbstractType
         $builder
             ->add('name')
             ->add('price')
-            ->add('picture')
+            ->add('picture',FileType::class, [
+                'label' => 'image',
+                'mapped' => false,
+                'required'=>false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ]
+                ])
             ->add('description')
             ->add('startAt', null, [
                 'widget' => 'single_text',

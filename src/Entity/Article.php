@@ -24,6 +24,8 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
+    
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;

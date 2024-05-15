@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create("fr_FR");
+      /*  $faker = \Faker\Factory::create("fr_FR");
 
         for($i = 0; $i < 5; $i++) {
             $article = new Article;
@@ -71,6 +71,6 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
 
         $manager->flush();
-    }
+    }*/
 }
 }
