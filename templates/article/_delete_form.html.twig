@@ -4,6 +4,6 @@
 <form method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" onsubmit="return confirm('Etes vous sûre de vouloir supprimer cet article?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
      {#% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %#}
-    <button class="btn btn-danger">Supprimer</button>
+    <button class="btn btn-danger" aria-label="supprimer" >Supprimer</button>
     {#% endif %#}
 </form>

@@ -35,6 +35,9 @@ class Event
     #[ORM\ManyToOne]
     private ?Category $category = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Event
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }

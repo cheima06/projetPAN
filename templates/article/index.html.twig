@@ -6,16 +6,20 @@
    
 
     <div class="col-10 border">
-        <div class="col-4">
+        
+
+    <h1 class="p-3
+    ">Nos derniers articles</h1>
+        {#% include "flash.html.twig" %#}
+
+        <div class="col-md-4">
             <h3 class="p-3">Rechercher un article</h3>
             <form action="{{path('app_search_articles')}}" class="form-inline my-2 my-lg-0 d-flex">
                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" aria-label="chercher un article">Chercher</button>
             </form>
         </div>
-
-    <h1 class="p-3">Nos derniers articles</h1>
-        {#% include "flash.html.twig" %#}
+        
 
             {% for article in articles %}
 

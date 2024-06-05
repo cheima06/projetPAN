@@ -33,7 +33,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'app_search_articles', methods: ['GET'])]
+    #[Route('/search_article', name: 'app_search_articles', methods: ['GET'])]
     public function getArticleBySearch(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         //si j'ai un parametre GET search
@@ -60,7 +60,7 @@ class HomeController extends AbstractController
     }
 
 
-    #[Route('/search', name: 'app_search_event', methods: ['GET'])]
+    #[Route('/search_event', name: 'app_search_event', methods: ['GET'])]
     public function getEventBySearch(EventRepository $eventRepository, PaginatorInterface $paginator, Request $request): Response
     {
         //si j'ai un parametre GET search
@@ -69,15 +69,15 @@ class HomeController extends AbstractController
         $search=strtolower($request->query->get("search"));
         
 
-        $event = $paginator->paginate(
-            $event=$eventRepository->findEventBySearch($search),
+        $events = $paginator->paginate(
+            $events=$eventRepository->findEventsBySearch($search),
             $request->query->getInt('page', 1), /*page number*/
             4 /*limit per page*/
 
         );
 
             return $this->render('event/index.html.twig', [
-            'event' => $event,
+            'events' => $events,
         ]);
 
         } else {

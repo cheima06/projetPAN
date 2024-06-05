@@ -4,69 +4,38 @@
 
 
 {% block body %}
-    <h1>Evenement</h1>
+    <h3 class="row justify-content-center"> Mon Evenement</h3>
 
 
 
 
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-8 mx-auto">
+       
 
-    <h1>{{ event.name }} </h1>
-        {% if event.picture is empty%}
+            <h3>{{ event.name }} </h3>
+
+                {% if event.picture is empty%}
                         <img class="col-md-2" src="{{ asset('build/images/default.webp') }}" alt="{{event.name}}" title="{{event.name}}">
-        {% else %}
+                {% else %}
                         <img class="col-md-2" src="{{ asset('build/images/' ~ event.picture)}}" alt="{{event.name}}" title="{{event.name}}">
-        {% endif %}
-    <p>Detail : {{event.description}}</p>
-    <p>Debut : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</p>
-    <p>Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</p>
-    <p>Prix : {{event.price}} €</p>
+                {% endif %}
+
+                <p>Detail : {{event.description}}</p>
+                <p>Debut : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</p>
+                <p>Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</p>
+                <p>Prix : {{event.price}} €</p>
     
 
  
 
-    <a class="btn btn-info" href="{{ path('app_event_index') }}">retour à la liste</a>
+                <a class="btn btn-info" href="{{ path('app_event_index') }}">retour à la liste</a>
 
-     {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
+            {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
 
-        <a class="btn btn-primary" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-        {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
+                <a class="btn btn-primary" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
     
-    {% endif %}
-
-
-    {#<table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ event.name }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ event.price }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ event.picture }}</td>
-            </tr>
-            <tr>
-                <th>StartAt</th>
-                <td>{{ event.startAt ? event.startAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndAt</th>
-                <td>{{ event.endAt ? event.endAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_event_index') }}">back to list</a>
-
-    <a href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
-
-    {{ include('event/_delete_form.html.twig') }}#}
+            {% endif %}
+        
+    </div>
 {% endblock %}

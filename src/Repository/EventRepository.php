@@ -49,7 +49,7 @@ class EventRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('e')
            ->Where('e.description LIKE :search')
-           ->orWhere('e.titre LIKE :search')
+           ->orWhere('e.name LIKE :search')
             ->setParameter('search', "%" .$search . "%")
             ->getQuery()
             ->getResult()

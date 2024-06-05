@@ -4,82 +4,54 @@
 
 
 {% block body %}
-    <h1 class="d-flex justify-content-center">Nos évenements</h1>
-        {#<div class="col-4">
+
+    <h1 class="d-flex justify-content-center align-items-center">Nos évenements  <img class="" src="{{ asset('/build/images/calendar.svg')}}" alt="evenement"></h1>
+        <div class="col-md-4">
             <h3 class="p-3">Rechercher un evenement</h3>
             <form action="{{path('app_search_event')}}" class="form-inline my-2 my-lg-0 d-flex">
                 <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" aria-label="chercher un evenement">Chercher</button>
             </form>
-        </div>#}
+        </div>
 
 
-    <div class="col-md-10 border d-flex px-2">
+        <div class="row col-md-12 border px-2">
 
-        {#% include "flash.html.twig" %#}
+            {#% include "flash.html.twig" %#}
         
-          {#}  {% for event in events %}
-            <div class="row align-items-center">
-                <a href="{{ path('app_event_show', {id : event.id })}}"></a>
+          
 
-                <div class="d-flex justify-content-center p-3">
 
-                    {% if event.picture is empty%}
-                        <img class="col-md-2" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
-                    {% else %}
-                        <img class="col-md-2" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
-                    {% endif %}
-
-                    <div class="col-md-2 d-flex flex-column ms-3">
-                        <h3>{{event.name}}</h3>
-                        <p>{{ event.startAt ? event.startAt|date('Y-m-d H:i:s') : '' }}</p>
-                        <p>{{ event.endAt ? event.endAt|date('Y-m-d H:i:s') : '' }}</p>
+            {% for event in events %}
+                <div class="card col-md-4 m-4" style="width: 18rem;">
+                        {% if event.picture is empty%}
+                            <img class="h-50" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
+                        {% else %}
+                            <img class="h-50" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
+                        {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{event.name}}</h5>
+                        <p>Du : {{ event.startAt ? event.startAt|date('d-m-Y H:i') : '' }}</p>
+                        <p>Au : {{ event.endAt ? event.endAt|date('d-m-Y H:i') : '' }}</p>
+                        <p>A : {{event.city}} </p>
+                        <p class="card-text">{{event.price}} €</p>
 
 
                         <a class="btn btn-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
-                        
-                        {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
+                        {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
                             <a class="btn btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                            <a class="btn btn-danger" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>    
                         {% endif %}
-                        
-                    </div> 
-
-                </div>
-                
-            </div>
-            {% endfor %}#}
-
-
-        {% for event in events %}
-            <div class="card col-md-4 m-4" style="width: 18rem;">
-                {% if event.picture is empty%}
-                    <img class="" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
-                {% else %}
-                    <img class="" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
-                {% endif %}
-            <div class="card-body">
-            <h5 class="card-title">{{event.name}}</h5>
-            <p>{{ event.startAt ? event.startAt|date('d-m-Y H:i') : '' }}</p>
-            <p>{{ event.endAt ? event.endAt|date('d-m-Y H:i') : '' }}</p>
-            <p class="card-text">{{event.price}} €</p>
-
-            <a class="btn btn-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
-        {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
-            <a class="btn btn-warning" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-            <a class="btn btn-danger" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>    
-        {% endif %}
            
+                    </div>
+                </div>
 
-            </div>
-            </div>
+            {% endfor %}
 
-        {% endfor %}
-
-   </div> 
+        </div> 
 
     
-  {#</div>
-</div>#}
+
         
 
 
@@ -88,52 +60,11 @@
             </div> 
 
  
-    
- 
             {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
                 <div class="row justify-content-center">
                 <a class="my-5 col-md-2 btn btn-primary" href="{{ path('app_event_new') }}">Créer nouveau</a>
                 </div>           
 
             {% endif %}
-      
 
-
-
-{#}
-    <table class="table">
-        <thead>
-            <tr>
-                {#<th>Id</th>
-                <th>Nom</th>
-                <th>image</th>
-                <th>Début</th>
-                <th>Fin</th>
-                <th>Prix</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for event in events %}
-            <tr class="col-6">
-                {#<td>{{ event.id }}</td>
-                <td>{{ event.name }}</td>
-                <td>{{ event.picture }}</td>
-                <td>{{ event.startAt ? event.startAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.endAt ? event.endAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ event.price }}</td>   
-            </tr>
-
-            <a class="btn btn-outline-info" href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
-            <a class="btn btn-outline-info" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-       
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun résultat trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a class="btn btn-outline-info" href="{{ path('app_event_new') }}">Créer un nouvel evenement</a>{#}
-   
 {% endblock %}

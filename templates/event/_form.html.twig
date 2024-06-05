@@ -11,6 +11,6 @@
      {{ form_row(form.price, {'label': 'prix'}) }}
 
     <br>
-    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    <button class="btn btn-primary" aria-label="enregistrer un evenement">{{ button_label|default('Enregistrer') }}</button>
     
 {{ form_end(form) }}

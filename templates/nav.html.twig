@@ -1,71 +1,56 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-  
-    <img height="75" src="{{ asset('build/images/logo.png')}}" >
-
-  <a class="navbar-brand p-2" href="{{path('app_home')}}">Accueil</a>
-
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_about')}}">A propos de nous</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_prestation')}}">Nos services</a>
-      </li>
-
-      {# <li class="nav-item">
-        <a class="nav-link" href="{#{path('app_contact')}}">Portfolio/Avis</a>#}
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_event_index')}}">Evenements</a>
-      </li>
-      
-      <li class="nav-item active">
-        <a class="nav-link" href="{{path('app_article_index')}}">Articles </a>
-      </li>
-  
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_contact')}}">Contact</a>
-      </li>
-      
-
-      {% if is_granted('ROLE_USER') %}
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_profile')}}">Profile</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_logout')}}">Deconnexion</a>
-        </li>
-
-      {% else %}
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_register')}}">S'inscrire</a>
-        </li>
-   
-      {% endif %}
-      
-    </ul>
-
-    {#<form action="{{path('app_search_articles')}}" class="form-inline my-2 my-lg-0 d-flex">
-      <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
-    </form>#}
-
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Navbar Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img height="100" src="{{ asset('build/images/logo.png') }}" alt="Logo">
+    <a class="navbar-brand p-2" href="{{ path('app_home') }}">Accueil</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_about') }}">A propos de nous</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_prestation') }}">Nos services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_event_index') }}">Evenements</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('app_article_index') }}">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+            </li>
+            {% if is_granted('ROLE_USER') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_profile') }}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
