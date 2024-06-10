@@ -2,3 +2,9 @@ body {
     background-color: skyblue;
 }
 
+.title {
+    font-size: 10rem;
+    border: 20px ridge #34495e;
+    box-shadow: 0px 0px 24px 6px rgba(35, 204, 41, 0.55);
+
+};

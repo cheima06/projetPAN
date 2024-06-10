@@ -3,19 +3,21 @@
 {% block title %}Event index{% endblock %}
 
 
+
 {% block body %}
 
-    <h1 class="d-flex justify-content-center align-items-center">Nos évenements  <img class="" src="{{ asset('/build/images/calendar.svg')}}" alt="evenement"></h1>
+    <h1 class="d-flex justify-content-center align-items-center title">Nos évenements  <img class="px-4" src="{{ asset('/build/images/calendar.svg')}}" alt="evenement"></h1>
+<div class="col-10">        
         <div class="col-md-4">
-            <h3 class="p-3">Rechercher un evenement</h3>
+            <h3 class="p-3 title2">Rechercher un evenement</h3>
             <form action="{{path('app_search_event')}}" class="form-inline my-2 my-lg-0 d-flex">
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Chercher" aria-label="Chercher">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" aria-label="chercher un evenement">Chercher</button>
             </form>
         </div>
 
 
-        <div class="row col-md-12 border px-2">
+        <div class="row justify-content-center col-md-12 border px-2">
 
             {#% include "flash.html.twig" %#}
         
@@ -66,5 +68,7 @@
                 </div>           
 
             {% endif %}
+
+</div>
 
 {% endblock %}

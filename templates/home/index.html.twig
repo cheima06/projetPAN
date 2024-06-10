@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
@@ -7,11 +6,11 @@
     <img class="col-12" src="{{ asset('build/images/accueil.png')}}" alt="photo de l'equipe">
 
 
-    <div class="d-flex justify-content-center col-12">
-        <div class="col-4">
-            <img class="p-4 border rounded"width="400px" src="{{ asset('build/images/event.jpg')}}" alt="photo de l'equipe">
+    <div class="row  justify-content-center col-10 col-md-12  pt-4">
+        <div class="col-8 col-md-4">
+            <img class="box rounded p-4 "width="400px" src="{{ asset('build/images/event.jpg')}}" alt="photo de l'equipe">
         </div>
-        <div class="col-5 pt-5">
+        <div class="col-11 col-md-5 pt-5">
             <p class="fs-5 ">Bienvenue chez PAN Afrique , votre partenaire de confiance en matière de consultation et conseil stratégique et opérationnel. Forts de plusieurs années d'expérience et d'une expertise reconnue dans divers secteurs, nous accompagnons les entreprises de toutes tailles dans leurs projets de transformation et de développement. Notre équipe de consultants chevronnés met à votre disposition des solutions sur mesure pour optimiser vos performances, innover et atteindre vos objectifs. Chez PAN Afrique, nous croyons en une approche collaborative et centrée sur le client, garantissant des résultats tangibles et durables. Explorez nos services pour découvrir comment nous pouvons contribuer à votre succès.</p>
         </div>
     </div>
@@ -24,13 +23,13 @@
     <h3 class="d-flex justify-content-center align-items-center pt-4 px-2">Nos derniers évenements  <img class=""width=80px height=80px src="{{ asset('/build/images/calendar1.png')}}" alt="evenement"></h3>
     <div class="col-10 p-4 d-flex justify-content-center">
         
-        <div class="col-4 row ">
+        <div class="col-6 col-md-4 row ">
             <p>Ne ratez plus aucun évènement grace a notre page qui recense tout les évènements auquel participer!<br>
             vous trouverez tout pleins d'activités, de salon, de meeting sur differents domaine!</p>
             <a class="my-5 col-md-4 btn btn-success" href="{{path('app_event_index')}}">Découvrez nos évènements</a>
         </div>
         <div class="col-4">
-            <img class="border border-success border-2 rounded" src="{{ asset('build/images/orga.jpg')}}" alt="">
+            <img class="box rounded" src="{{ asset('build/images/orga.jpg')}}" alt="">
         </div>
     </div>
 

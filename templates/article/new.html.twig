@@ -3,13 +3,13 @@
 {% block title %}New Article{% endblock %}
 
 {% block body %}
-    <h1>Create new Article</h1>
-    <div class="col-md-6">
+    <h1 class="row justify-content-center">Créer un nouvel Article</h1>
+    <div class="row justify-content-center col-10  px-2">
     
     {#% include "flash.html.twig" %#}
 
     {{ include('article/_form.html.twig') }}
-
-    <a class="btn btn-secondary" href="{{ path('app_article_index') }}">retour à la liste</a>
-    </div>
+    </div><br>
+    <a class="btn btn-success" href="{{ path('app_article_index') }}">retour à la liste</a>
+    
 {% endblock %}

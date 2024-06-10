@@ -9,13 +9,13 @@
     
 
 
-    <div class="col-md-10 mx-auto">
+    <div class="col-10 mx-auto">
 
     <h1>{{ article.titre }} </h1>
         {% if article.photo is empty%}
-                        <img class="col-md-3" src="{{ asset('build/images/default.webp') }}" alt="{{article.titre}}" titre="{{article.titre}}">
+                        <img class="col-4 col-md-3" src="{{ asset('build/images/default.webp') }}" alt="{{article.titre}}" titre="{{article.titre}}">
         {% else %}
-                        <img class="col-md-3" src="{{ asset('build/images/' ~ article.photo)}}" alt="{{article.titre}}" titre="{{article.titre}}">
+                        <img class="col-4 col-md-3" src="{{ asset('build/images/' ~ article.photo)}}" alt="{{article.titre}}" titre="{{article.titre}}">
         {% endif %}
         
     <p> {{ article.description }} </p>
