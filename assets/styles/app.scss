@@ -8,15 +8,21 @@ body {
 
 .title {
     font-size: 5rem;
-    text-shadow: 4px 4px 6px green ; 
+    color: rgb(69, 237, 69);
+    font-style: bold;
+    font-family: cursive;
+    text-shadow: 4px 4px 6px rgb(36, 175, 203) ; 
 }
 .title2{
     font-size: 2rem;
-    text-decoration: underline;
-    text-shadow: 4px 4px 6px green ; 
+    //text-decoration: underline;
+    text-shadow: 4px 4px 6px rgb(69, 237, 69) ; 
 }
 .box {
     box-shadow: 0px 0px 24px 6px rgba(35, 204, 41, 0.55);
+}
+.bouton {
+    background-color: rgb(58, 216, 127);
 }
 
     

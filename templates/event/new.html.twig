@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Event{% endblock %}
+{% block title %}Nouvel événement{% endblock %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
-    <div class="col-md-6">
-    <h1>Créer un nouvel événement</h1>
 
-    {{ include('event/_form.html.twig', {'button_label': 'enregistrer'}) }}
+   <h1 class="text-center title2">Créér un nouvel événement</h1>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 px-4">
+                 {{ include('event/_form.html.twig', {'button_label': 'enregistrer'}) }}
 
-    <a class="btn btn-primary"href="{{ path('app_event_index') }}">retour à la liste</a>
+                <br>
+                <a class="btn btn-primary"href="{{ path('app_event_index') }}">retour à la liste</a>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

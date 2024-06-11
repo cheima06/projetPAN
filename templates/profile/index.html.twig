@@ -7,7 +7,7 @@
   {#% include "flash.html.twig" %#} 
 
 
- <h3 class="row justify-content-center pb-4 ">Mon profil</h3>
+ <h3 class="row justify-content-center pb-4 title ">Mon profil</h3>
     <div class="row justify-content-center">
       <div class="col-md-6 row justify-content-center">
         {% if app.user.sexe == 'masculin' %}
@@ -47,9 +47,9 @@
             </tr>
           </tbody>
         </table>
-          <a class="btn btn-outline-info" href="{{path('app_profile_edit')}}">Modifier informations</a>
-          <a class="btn btn-outline-info" href="{{path('app_profile_password_edit')}}">Modifier Mot de passe</a>
-          <a class="btn btn-outline-info" href="">Supprimer mon compte </a> 
+          <a class="btn btn-outline-warning" href="{{path('app_profile_edit')}}">Modifier informations</a>
+          <a class="btn btn-outline-warning" href="{{path('app_profile_password_edit')}}">Modifier Mot de passe</a>
+          <a class="btn btn-outline-danger " href="">Supprimer mon compte </a> 
       </div>
     </div>
 

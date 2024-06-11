@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}Evénement{% endblock %}
 
 
 {% block body %}
-    <h3 class="row justify-content-center"> Mon Evenement</h3>
+    <h3 class="text-center title2"> Mon Evénement</h3>
 
 
 
 
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-8 mx-auto px-3">
        
 
             <h3>{{ event.name }} </h3>
@@ -20,19 +20,16 @@
                         <img class="col-4 col-md-2" src="{{ asset('build/images/' ~ event.picture)}}" alt="{{event.name}}" title="{{event.name}}">
                 {% endif %}
 
-                <p>Detail : {{event.description}}</p>
-                <p>Debut : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</p>
+                <p>Détail : {{event.description}}</p>
+                <p>Début : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</p>
                 <p>Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</p>
                 <p>Prix : {{event.price}} €</p>
     
-
- 
-
-                <a class="btn btn-info" href="{{ path('app_event_index') }}">retour à la liste</a>
+                <a class="btn btn-info" href="{{ path('app_event_index') }}">Retour à la liste</a>
 
             {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
 
-                <a class="btn btn-primary" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                <br><a class="btn btn-warning mt-4" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
                 {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
     
             {% endif %}
