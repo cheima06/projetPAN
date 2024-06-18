@@ -24,12 +24,12 @@ class ArticleType extends AbstractType
                 'required'=>false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '2024k',
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'SVP veuillez télécharger une photo qui correspondent aux criteres',
                     ])
                 ]
                 ])

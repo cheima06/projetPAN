@@ -25,11 +25,11 @@
                 <p>Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</p>
                 <p>Prix : {{event.price}} €</p>
     
-                <a class="btn btn-info" href="{{ path('app_event_index') }}">Retour à la liste</a>
+                <a class="btn bouton" href="{{ path('app_event_index') }}">Retour à la liste</a>
 
             {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
 
-                <br><a class="btn btn-warning mt-4" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                <br><a class="btn bouton mt-4" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
                 {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
     
             {% endif %}

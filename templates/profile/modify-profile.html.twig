@@ -4,31 +4,26 @@
 
 {% form_theme profileForm 'bootstrap_5_layout.html.twig' %}
 
-
 {% block body %}
+<h2 class="text-center">Modifier mon profil</h2>
+<div class="d-flex justify-content-center align-items-center" >
+    <div class="col-md-8">
+        {{ form_start(profileForm, {'attr': {'class': 'row', 'novalidate': 'novalidate'}}) }}
 
-<div class="row col-md-10">
-
-    {{form_start(profileForm, {'attr':{'class':'row','novalidate':'novalidate'}} )}}
-
-        {{form_row(profileForm.name,{'row_attr':{'class':'col-md-6'}})}}
-        {{form_row(profileForm.firstName,{'row_attr':{'class':'col-md-6'}})}}
-
-        {{form_row(profileForm.sexe,{'row_attr':{'class':'col-md-6'}})}}
-        {{form_row(profileForm.email,{'row_attr':{'class':'col-md-6'}})}}
-
-
-        
-        {{form_row(profileForm.adresse,{'row_attr':{'class':'col-md-6'}})}}
-        {{form_row(profileForm.postalCode,{'row_attr':{'class':'col-md-6'}})}}
-        
-        {{form_row(profileForm._token)}}
-
-    <button type='submit' class="btn btn-outline-warning mt-5" aria-label='modifier profil'>Modifier profil</button>
-    
-    {# {render_rest:  veut dire n'affiche pas le reste des autres champs dans mon formulaire #}
-    {{form_end(profileForm, {render_rest:false })}}
-
+        {{ form_row(profileForm.name, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm.firstName, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm.sexe, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm.email, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm.adresse, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm.postalCode, {'row_attr': {'class': 'col-md-6'}}) }}
+        {{ form_row(profileForm._token) }}
+        <div class="text-center mt-3">
+            <button type='submit' class="btn bouton " aria-label='modifier profil'>Modifier profil</button>
+            <a class="btn bouton " href="{{ path('app_profile') }}">Retour à la liste</a>
+        </div>
+        {{ form_end(profileForm, { render_rest: false }) }}
+     
+            
+    </div>
 </div>
-
 {% endblock %}

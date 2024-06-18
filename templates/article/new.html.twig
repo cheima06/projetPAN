@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Article{% endblock %}
+{% block title %}Nouvel Article{% endblock %}
 
 {% block body %}
-    <h1 class="row justify-content-center">Créer un nouvel Article</h1>
-    <div class="row justify-content-center col-10  px-2">
-    
-    {#% include "flash.html.twig" %#}
+    <h3 class="text-center title2">Créer un nouvel Article</h3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 px-4">
+                 
+                {#% include "flash.html.twig" %#}
 
-    {{ include('article/_form.html.twig') }}
-    </div><br>
-    <a class="btn btn-success" href="{{ path('app_article_index') }}">retour à la liste</a>
-    
+                {{ include('article/_form.html.twig') }}
+
+                <br><a class="btn bouton" href="{{ path('app_article_index') }}">retour à la liste</a>
+            </div>
+        </div> 
+    </div>    
+
 {% endblock %}

@@ -13,8 +13,8 @@
         <div class="col-10 col-md-4 px-2">
             <h3 class="p-3 title2">Rechercher un événement</h3>
             <form action="{{path('app_search_event')}}" class="form-inline d-flex">
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Chercher" aria-label="Chercher">
-                <button class="btn btn-success" type="submit" aria-label="chercher un événement">Chercher</button>
+                <input class="form-control mr-sm-2 m-2" name="search" type="search" placeholder="Chercher" aria-label="Chercher">
+                <button class="btn bouton my-sm-2" type="submit" aria-label="chercher un événement">Chercher</button>
             </form>
         </div>
 
@@ -39,10 +39,10 @@
 
                     <div class="row">
                         
-                        <a class="btn btn-info " href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
+                        <a class="btn bouton " href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
                         
                         {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
-                            <a class="btn btn-warning mt-2" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                            <a class="btn bouton mt-2" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
                             <a class="btn btn-danger mt-2" href="{{path('app_event_delete', {'id': event.id}) }}">Supprimer</a>    
                         {% endif %}
                     </div>
@@ -65,7 +65,7 @@
  
             {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
                 <div class="row justify-content-center">
-                <a class="my-5 col-3 btn btn-primary" href="{{ path('app_event_new') }}">Créer un nouvel événement</a>
+                <a class="my-5 col-3 btn bouton" href="{{ path('app_event_new') }}">Créer un nouvel événement</a>
                 </div>           
 
             {% endif %}

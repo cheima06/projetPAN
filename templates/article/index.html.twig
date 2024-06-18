@@ -4,67 +4,58 @@
 
 {% block body %}
    
-    <h1 class="d-flex justify-content-center align-items-center title">Nos derniers articles <img class="px-4" width=120px height=100px  src="{{ asset('/build/images/blog.png')}}" alt="article"></h1>
+<h1 class="text-center title">
+    Nos derniers articles 
+    <img class="px-4" width="120" height="100" src="{{ asset('/build/images/blog.png') }}" alt="article">
+</h1>
 
-        
-    <div class="col-12">
-        <div class="col-10 col-md-4 px-2">
-            <h3 class="p-3 title2">Rechercher un article</h3>
-            <form action="{{path('app_search_articles')}}" class="form-inline my-2 my-lg-0 d-flex">
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" aria-label="chercher un article">Chercher</button>
-            </form>
-        </div>
-        
-        <div class="row justify-content-center col-md-12 border px-2">
-        
+<div class="col-12">
+    <div class="col-10 col-md-4 px-2">
+        <h3 class="p-3 title2">Rechercher un article</h3>
+        <form action="{{ path('app_search_articles') }}" class="form-inline my-2 my-lg-0 d-flex">
+            <input class="form-control mr-sm-2 m-2" name="search" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn bouton my-2 my-sm-2" type="submit" aria-label="chercher un article">Chercher</button>
+        </form>
+    </div>
+
+    <div class="row justify-content-center col-md-12 border px-2">
         {#% include "flash.html.twig" %#}
 
-        {% for article in articles %}
+        <div class="row ">
+            {% for article in articles %}
+                <div class="col-md-6 ">
+                    <div class="d-flex article p-3 ">
+                        {% if article.photo is empty %}
+                            <img class="col-md-6" max-height="100%" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{ article.titre }}" title="{{ article.titre }}">
+                        {% else %}
+                            <img class="col-md-6" max-height="100%" src="{{ asset('/uploads/articles/' ~ article.photo) }}" alt="{{ article.titre }}" title="{{ article.titre }}">
+                        {% endif %}
 
-            {#<a href="{{ path('app_article_show', {id : article.id })}}"></a>#}
+                        <div class="col-md-6 d-flex flex-column ms-3" max-height="1rem">
+                            <h3>{{ article.titre }}</h3>
+                            <p>{{ article.date|date('d/m/Y ') }}</p>
 
-            <div class="d-flex article p-3">
-
-                {% if article.photo is empty%}
-                    <img class="col-md-3" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{article.titre}}" titre="{{article.titre}}">
-                {% else %}
-                    <img class="col-md-3" src="{{ asset('/uploads/articles/' ~ article.photo)}}" alt="{{article.titre}}" title="{{article.titre}}">
-                {% endif %}
-
-                <div class="col-md-2 d-flex flex-column ms-3">
-                    <h3>{{article.titre}}</h3>
-                    {#<p>{{article.description}}</p>#}
-
-                    <a class="btn btn-outline-info mb-3" href="{{path('app_article_show', {'id': article.id}) }}">Voir</a>
-                        
-                    {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
-                        <a class="btn btn-outline-warning " href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-                    {% endif %}
-                        
-                </div> 
-            </div>
-
-            </div>
-                
-
-        {% endfor %}
-
-            <div class="navigation col-md-8 d-flex justify-content-center">
-                {{ knp_pagination_render(articles) }}
-            </div>
-
-        {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
+                            <a class="btn bouton mb-2" href="{{ path('app_article_show', { 'id': article.id }) }}">Voir</a>
                             
+                            {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
+                                <a class="btn bouton" href="{{ path('app_article_edit', { 'id': article.id }) }}">Modifier</a>
+                                <a class="btn btn-danger mt-2" href="{{ path('app_article_delete', { 'id': article.id }) }}">Supprimer</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="navigation col-md-8 d-flex justify-content-center">
+            {{ knp_pagination_render(articles) }}
+        </div>
+
+        {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
             <div class="row justify-content-center">
-                <a class="my-5 col-md-2 btn bouton" href="{{ path('app_article_new') }}">Creer</a>
-            </div> 
-                
+                <a class="my-5 col-md-2 btn bouton" href="{{ path('app_article_new') }}">Créer</a>
+            </div>
         {% endif %}
-
-
-
-
-
+    </div>
 </div>
 {% endblock %}

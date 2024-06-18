@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Article{% endblock %}
+{% block title %}Modifier Article{% endblock %}
 
 {% block body %}
 
     {#% include "flash.html.twig" %#}
 
-    <h1>Modifier Article</h1>
-    <div class="col-10 col-md-6">
+    <h2 class="text-center title2">Modifier Article</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 px-4">
 
-    {{ include('article/_form.html.twig', {'button_label': 'Modifier'}) }}
+                {{ include('article/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+                <br>
+                <a class="btn bouton mb-4" href="{{ path('app_article_index') }}">Retour à la liste</a>
+                
+                {{ include('article/_delete_form.html.twig') }}
+                
+            </div>
+        </div>
 
-    <a class="btn btn-primary" href="{{ path('app_article_index') }}">Retour à la liste</a>
-
-    {{ include('article/_delete_form.html.twig') }}
     </div>
+
 
 {% endblock %}
