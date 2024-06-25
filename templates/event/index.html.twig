@@ -25,7 +25,7 @@
         
             {% for event in events %}
                 <div class="card col-md-4 m-4" style="width: 18rem;">
-                        {% if event.picture is empty%}
+                        {% if event.picture is empty %} {#grace a twig la fct asset va creer le bon chemin pour recup les photos#}
                             <img class="h-50" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
                         {% else %}
                             <img class="h-50" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">

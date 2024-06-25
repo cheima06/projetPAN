@@ -65,14 +65,14 @@ class HomeController extends AbstractController
     {
         //si j'ai un parametre GET search
         if($request->query->has("search")){
-
+            //récupère la valeur en miniscule du paramètre search de la chaîne de requête GET. 
         $search=strtolower($request->query->get("search"));
         
 
         $events = $paginator->paginate(
             $events=$eventRepository->findEventsBySearch($search),
-            $request->query->getInt('page', 1), /*page number*/
-            4 /*limit per page*/
+            $request->query->getInt('page', 1), /*numero de la premiere page*/
+            4 /*nombre d'évenement par page*/
 
         );
 

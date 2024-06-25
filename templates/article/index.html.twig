@@ -34,6 +34,7 @@
                         <div class="col-md-6 d-flex flex-column ms-3" max-height="1rem">
                             <h3>{{ article.titre }}</h3>
                             <p>{{ article.date|date('d/m/Y ') }}</p>
+                            
 
                             <a class="btn bouton mb-2" href="{{ path('app_article_show', { 'id': article.id }) }}">Voir</a>
                             
