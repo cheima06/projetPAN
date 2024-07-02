@@ -6,26 +6,46 @@
 
 {% block body %}
 
-    <h1 class="text-center title">Nos événements  <img class="px-4" width=120px height=100px src="{{ asset('/build/images/calendar.png')}}" alt="événement"></h1>
+    <h1 class="text-center title">Nos événements  <img class="px-4" width="120px" height="100px" src="{{ asset('/build/images/calendar.png')}}" alt="événement"></h1>
 
     <div class="col-12">        
-
-        <div class="col-10 col-md-4 px-2">
-            <h3 class="p-3 title2">Rechercher un événement</h3>
-            <form action="{{path('app_search_event')}}" class="form-inline d-flex">
+{#barre de recherche #}
+        <div class="d-flex flex-column align-items-end px-2">
+            <h3 class="text-end p-3 title2">Rechercher un événement</h3>
+            <form action="{{path('app_search_event')}}" class=" col-10 col-md-4 form-inline d-flex">
                 <input class="form-control mr-sm-2 m-2" name="search" type="search" placeholder="Chercher" aria-label="Chercher">
                 <button class="btn bouton my-sm-2" type="submit" aria-label="chercher un événement">Chercher</button>
             </form>
         </div>
+        
+        {# filtre #}
+        <div class="dropdown">
+        <div class="d-flex flex-column align-items-end px-2">
 
+            <button class="btn bouton dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if filter == 'ASC' %}
+                    Par date croissante
+                {% elseif filter == 'DESC' %}
+                    Par date décroissante
+                {% else %}
+                    Sélectionner un filtre
+                {% endif %}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{path('app_event_index', { filter : 'ASC' })}}">Par date croissante</a></li>
+                <li><a class="dropdown-item" href="{{path('app_event_index', { filter : 'DESC' })}}">Par date décroissante</a></li>
+            </ul>
+        </div>
+        </div>
 
-        <div class="row justify-content-center col-md-12 border px-2">
+{#card evenement #}
+        <div class="row justify-content-center col-md-12 border px-2" id="list-events">
 
-            {#% include "flash.html.twig" %#}
+            {% include "flash.html.twig" %}
         
             {% for event in events %}
                 <div class="card col-md-4 m-4" style="width: 18rem;">
-                        {% if event.picture is empty %} {#grace a twig la fct asset va creer le bon chemin pour recup les photos#}
+                        {% if event.picture is empty %} {#grace a twig la fonction asset va creer le bon chemin pour recup les photos#}
                             <img class="h-50" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
                         {% else %}
                             <img class="h-50" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
@@ -38,7 +58,7 @@
                         <p class="card-text">{{event.price}} €</p>
 
                     <div class="row">
-                        
+{# Bouton #}
                         <a class="btn bouton " href="{{ path('app_event_show', {'id': event.id}) }}">Voir</a>
                         
                         {% if app.user and "ROLE_ADMIN" in app.user.getroles()  %}
@@ -52,10 +72,6 @@
             {% endfor %}
 
         </div> 
-
-    
-
-        
 
 
         <div class="d-flex justify-content-center navigation col-md-12">

@@ -22,16 +22,17 @@ class EventType extends AbstractType
                 'required'=>false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2024k',
+                        'maxSize' => '3000k',
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'SVP veuillez télécharger une photo qui correspondent aux criteres',
                     ])
                 ]
                 ])
             ->add('description')
+            ->add('city')
             ->add('startAt', null, [
                 'widget' => 'single_text',
             ])

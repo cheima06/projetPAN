@@ -23,7 +23,8 @@ class Article
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $photo = null;
+    //private ?string $photo = null;
+    private $photo = 'default.png';
     
 
 
@@ -32,6 +33,9 @@ class Article
 
     #[ORM\ManyToOne]
     private ?Category $category = null;
+
+    #[ORM\Column(length: 3000)]
+    private ?string $texte = null;
 
     
     public function getId(): ?int
@@ -95,6 +99,18 @@ class Article
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getTexte(): ?string
+    {
+        return $this->texte;
+    }
+
+    public function setTexte(string $texte): static
+    {
+        $this->texte = $texte;
 
         return $this;
     }

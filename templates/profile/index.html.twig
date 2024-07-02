@@ -49,7 +49,10 @@
         </table>
           <a class="btn bouton " href="{{path('app_profile_edit')}}">Modifier informations</a>
           <a class="btn bouton" href="{{path('app_profile_password_edit')}}">Modifier Mot de passe</a>
-          <a class="btn btn-danger " href="">Supprimer mon compte </a> 
+          <a class="btn btn-danger " href="{#{path('app_profile_delete')}#}">Supprimer mon compte </a> 
+          {#% if app.user and 'ROLE_ADMIN' in app.user.getRoles() %}
+             <a class="btn bouton " href="{{path('app_admin')}}">Acceder au profil Admin</a> 
+          {% endif %#}
       </div>
     </div>
 

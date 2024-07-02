@@ -33,8 +33,12 @@
             </li>
             {% if is_granted('ROLE_USER') %}
             <li class="nav-item">
-                <a class="nav-link a" href="{{ path('app_profile') }}">Profile</a>
+                <a class="nav-link a" href="{{ path('app_profile') }}">Profil</a>
             </li>
+
+            {% if app.user and 'ROLE_ADMIN' in app.user.getRoles() %}
+                <a class="nav-link a " href="{{path('app_admin')}}">Tableau de bord</a> 
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link a" href="{{ path('app_logout') }}">Deconnexion</a>
             </li>

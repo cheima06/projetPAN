@@ -2,37 +2,38 @@
 
 {% block title %}Evénement{% endblock %}
 
-
 {% block body %}
-    <h3 class="text-center title2"> Mon Evénement</h3>
+<div class="container mt-5">
+    <h3 class="text-center title2 mb-4">Mon Evénement</h3>
 
-
-
-
-    <div class="col-md-8 mx-auto px-3">
-       
-
-            <h3>{{ event.name }} </h3>
-
-                {% if event.picture is empty%}
-                        <img class="col-4 col-md-2" src="{{ asset('build/images/default.webp') }}" alt="{{event.name}}" title="{{event.name}}">
+    <div class="card mx-auto shadow-sm" style="max-width: 800px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {% if event.picture is empty %}
+                    <img src="{{ asset('/uploads/event/default.webp') }}" class="img-fluid rounded-start" alt="{{ event.name }}" title="{{ event.name }}">
                 {% else %}
-                        <img class="col-4 col-md-2" src="{{ asset('build/images/' ~ event.picture)}}" alt="{{event.name}}" title="{{event.name}}">
+                    <img src="{{ asset('/uploads/event/' ~ event.picture)}}" class="img-fluid rounded-start" alt="{{ event.name }}" title="{{ event.name }}">
                 {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.name }}</h5>
+                    <p class="card-text">{{ event.description }}</p>
+                    <p class="card-text"><small class="text-muted">Début : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</small></p>
+                    <p class="card-text"><small class="text-muted">Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</small></p>
+                    <p class="card-text"><strong>Prix : {{ event.price }} €</strong></p>
+                    <div class="d-flex">
+                        <a class="btn btn-primary" href="{{ path('app_event_index') }}">Retour à la liste</a>
 
-                <p>Détail : {{event.description}}</p>
-                <p>Début : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</p>
-                <p>Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</p>
-                <p>Prix : {{event.price}} €</p>
-    
-                <a class="btn bouton" href="{{ path('app_event_index') }}">Retour à la liste</a>
+                        {% if app.user and 'ROLE_ADMIN' in app.user.getRoles() %}
+                            <a class="btn btn-secondary " href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                            {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
+                        {% endif %}
+                    </div>
 
-            {% if app.user and 'ROLE_ADMIN' in app.user.getroles()  %}
-
-                <br><a class="btn bouton mt-4" href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-                {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
-    
-            {% endif %}
-        
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

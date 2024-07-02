@@ -22,6 +22,7 @@ class Event
 
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
+    //private $picture = 'default.png'; 
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startAt = null;

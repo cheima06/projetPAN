@@ -9,14 +9,16 @@
     <div class="col-10 mx-auto">
 
         <h3>{{ article.titre }} </h3>
-        {% if article.photo is empty%}
-                        <img class="col-4 col-md-3" src="{{ asset('build/images/default.webp') }}" alt="{{article.titre}}" titre="{{article.titre}}">
+        <p class="col-6"> {{ article.texte }} </p>
+        <p>Date: {{ article.date|date('d/m/Y ') }}</p>
+        {% if article.photo is empty %}
+            <img class="col-md-6" max-height="100%" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{ article.titre }}" title="{{ article.titre }}">
         {% else %}
-                        <img class="col-4 col-md-3" src="{{ asset('build/images/' ~ article.photo)}}" alt="{{article.titre}}" titre="{{article.titre}}">
+            <img class="col-md-6" max-height="100%" src="{{ asset('/uploads/articles/' ~ article.photo) }}" alt="{{ article.titre }}" title="{{ article.titre }}">
         {% endif %}
         
     <p class="col-6"> {{ article.description }} </p>
-    <p>Date: {{ article.date|date('d/m/Y ') }}</p>
+    
 
 
 

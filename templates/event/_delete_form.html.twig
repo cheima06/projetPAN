@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <form method="post" action="{{ path('app_event_delete', {'id': event.id}) }}" onsubmit="return confirm('Etes-vous sure de vouloir supprimer?');">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
-        <br><button class="btn btn-danger" aria-label="supprimer un événement">Supprimer</button>
+        <button class="btn btn-danger" aria-label="supprimer un événement">Supprimer</button>
     </form>
 </div>

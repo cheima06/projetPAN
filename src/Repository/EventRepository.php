@@ -54,6 +54,15 @@ class EventRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+    public function findEventByFilter($filter): array
+    {
 
-}
+        return $this->createQueryBuilder('e')
+            ->orderBy("e.startAt", $filter)
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
 }

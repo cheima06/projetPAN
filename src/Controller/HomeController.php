@@ -44,13 +44,14 @@ class HomeController extends AbstractController
 
         $articles = $paginator->paginate(
             $articles=$articleRepository->findArticlesBySearch($search),
-            $request->query->getInt('page', 1), /*page number*/
-            4 /*limit per page*/
+        //     $request->query->getInt('page', 1), /*page number*/
+        //     4 /*limit per page*/
 
-        );
+         );
 
             return $this->render('article/index.html.twig', [
             'articles' => $articles,
+            'filter' => null
         ]);
 
         } else {

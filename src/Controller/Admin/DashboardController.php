@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         //return parent::index();
@@ -50,6 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Mes articles', 'fas fa-list', Article::class);
         yield MenuItem::linkToCrud('Mes catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Mes Events', 'fas fa-list', Event::class);
+        yield MenuItem::linkToRoute("Retour à l'accueil", 'fa fa-arrow-left', 'app_home'); 
 
     }
 }

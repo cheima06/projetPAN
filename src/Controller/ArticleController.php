@@ -11,6 +11,8 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,16 +25,32 @@ class ArticleController extends AbstractController
     PaginatorInterface $paginator, 
     Request $request ): Response
     {
+        $filter = $request->query->get('filter');
+        //Récupère le paramètre 'filter' de la requête
+        
+        // Récupère les événements selon le filtre, s'il est défini
+        if ($filter === 'ASC') {
+            $articles = $articleRepository->findBy([],
+            ['date' => 'ASC']);
+        } elseif ($filter === 'DESC') {
+            $articles = $articleRepository->findBy([],
+            ['date' => 'DESC']);
+        } else {
+            // Par défaut, affiche tous les événements
+            $articles = $articleRepository->findAll();
+        }
 
+        // Pagination des événements
         $articles = $paginator->paginate(
-            $articles= $articleRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            4 /*limit per page*/
-
+            $articles,
+            $request->query->getInt('page', 1), // numéro de page
+            4 // nombre d'éléments par page
         );
+
         
         return $this->render('article/index.html.twig', [
             'articles' => $articles, 
+            'filter'=> $filter
         ]);
     }
 
@@ -45,11 +63,33 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($article);
-            $entityManager->flush();
+           /** @var UploadedFile $pictureFile */
+           $pictureFile = $form->get('photo')->getData();
 
-            return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+           if ($pictureFile) {
+            $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
+
+            try {
+                $pictureFile->move(
+                    $this->getParameter('article_picture_directory'),
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // Handle exception
+            }
+
+            $article->setPhoto($newFilename);
+        } else {
+            // Utiliser une image par défaut si aucune image n'est téléchargée
+            $article->setPhoto('default.png');
         }
+
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+    }
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
@@ -74,10 +114,34 @@ class ArticleController extends AbstractController
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
+        $originalPicture = $article->getPhoto();
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $form->get('picture')->getData();
+
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
+
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('article_picture_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception
+                }
+
+                $article->setPhoto($newFilename);
+            } else {
+                // Utiliser l'image d'origine si aucune nouvelle image n'est téléchargée
+                $article->setPhoto($originalPicture ?: 'default.png');
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
@@ -108,4 +172,6 @@ class ArticleController extends AbstractController
             'articles' => $articles,
         ]);
     }
+
+    
 }
