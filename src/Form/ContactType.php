@@ -57,15 +57,7 @@ class ContactType extends AbstractType
                     'placeholder' => 'Objet'
                 ],
                 'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
-                    /*'choices'  => [
-                        'Je souhaite devenir formateur' => 'Je souhaite devenir formateur',
-                        'Je souhaite devenir développeur' => 'Je souhaite devenir développeur',
-                        'Je souhaite entrer en contact' => 'Je souhaite entrer en contact',
-                    ],
-                    'choice_attr' => [
-                        'Veuillez choisir une valeur par défaut' => ['disabled' => true]
-                    ],*/
-                    'row_attr' => ['class' => 'col-md-12', 'id' => '...'],
+        
                 ])
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
@@ -82,9 +74,7 @@ class ContactType extends AbstractType
                     // l'input check box sera pas forcément lié à un attribut de Contact
                 
                 ])
-            //->add('date', DateType::class, [
-                
-               // ])
+            //->add('date')
             ->add('save', SubmitType::class, [
                 'label'=> 'Nous contacter',
                 'attr' => ['class' => 'bouton',]

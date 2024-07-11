@@ -8,6 +8,7 @@ parameters:
     app.mailAddress: '%env(MAIL_ADDRESS)%'
     article_picture_directory: '%kernel.project_dir%/public/uploads/articles'
     event_picture_directory: '%kernel.project_dir%/public/uploads/event'
+    app.stripe_key: '%env(STRIPE_KEY)%'
     
 
 services:

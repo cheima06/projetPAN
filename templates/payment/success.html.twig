@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation d'achat{% endblock %}
+
+{% block body %}
+<div class="container mt-5" style="font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #333;">
+    <h2 class="text-center mb-4 title" >Confirmation de votre achat</h2>
+    <p>Bonjour,</p>
+    <p>Merci pour votre achat. Voici les détails de votre commande :</p>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Numéro de facture :</strong> {{ invoiceNumber }}</li>
+        <li class="list-group-item"><strong>Date :</strong> {{ date|date('d-m-y') }}</li>
+        <li class="list-group-item"><strong>Montant total :</strong> {{ amount }} €</li>
+    </ul>
+    <h3 class="mb-3">Produits achetés :</h3>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>Evenement</th>
+                <th class="text-right">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in orderDetails %}
+                <tr>
+                    <td>{{ detail.product.name }}</td>
+                    <td class="text-right">{{ detail.product.price }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="mt-4">Nous espérons vous revoir bientôt.</p>
+</div>
+{% endblock %}

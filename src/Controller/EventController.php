@@ -53,14 +53,14 @@ class EventController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $event = new Event();
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $form = $this->createForm(EventType::class, $event);//cree formulaire via entite event
+        $form->handleRequest($request);//lie les données de la requette au formulaire+validation
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) { //si el formulaire et soumit et valide
             /** @var UploadedFile $pictureFile */
-            $pictureFile = $form->get('picture')->getData();
+            $pictureFile = $form->get('picture')->getData();//récupère les données du champ picture. Si un fichier a été téléchargé, cette méthode retournera un objet UploadedFile
 
-            if ($pictureFile) {
+            if ($pictureFile) { // on renome le nom du fichier
                 $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
 
@@ -73,14 +73,14 @@ class EventController extends AbstractController
                     // Handle exception
                 }
 
-                $event->setPicture($newFilename);
+                $event->setPicture($newFilename);//met a jour l'entité avec le nom du fichier
             } else {
                 // Utiliser une image par défaut si aucune image n'est téléchargée
                 $event->setPicture('default.png');
             }
 
-            $entityManager->persist($event);
-            $entityManager->flush();
+            $entityManager->persist($event);//prepare persiste
+            $entityManager->flush();//enregistre en base
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -105,7 +105,7 @@ class EventController extends AbstractController
         $originalPicture = $event->getPicture();
 
         $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $form->handleRequest($request);//On lie les données de la requête au formulaire et on les valide.
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $pictureFile */
@@ -138,26 +138,27 @@ class EventController extends AbstractController
         return $this->render('event/edit.html.twig', [
             'event' => $event,
             'form' => $form,
-        ]);
+        ]);//Si le formulaire n'est pas soumis ou n'est pas valide, on affiche à nouveau le formulaire avec les erreurs éventuelles.
     }
 
 
     #[Route('/{id}/delete', name: 'app_event_delete', methods: ['POST'])]
     public function delete(Request $request, Event $event, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $entityManager->remove($event);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
     }
+     
 
     #[Route('/category/{id_category}', name: 'app_get_event_by_category', methods: ['GET'])]
     public function getEventByCategory(EntityManagerInterface $entityManager, int $id_category): Response
     {
         $event=$entityManager->getRepository(Event::class)->findBy(array('category'=>$id_category));
-        return $this->render('event/index.html.twig', [
+        return $this->render('event/index.html.twig', [ 
             'event' => $event,
         ]);
     }
@@ -170,9 +171,9 @@ class EventController extends AbstractController
     string $filter,
     SerializerInterface $serializer
     ): JsonResponse
-    {
+    {   // on recupere tout les evenements
         $events = $eventRepository->findEventByFilter($filter);
-
+//on cree un tableau , dans lequel on mettra toutes les events grace a la boucle
         $eventsDatas = [];
 
         foreach ($events as $event) {

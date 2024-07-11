@@ -3,7 +3,7 @@
 
 {% block body %}
 
-    <img class="col-12" src="{{ asset('build/images/accueil.png')}}" alt="photo de l'equipe">
+    <img class="col-md-12" src="{{ asset('build/images/accueil.png')}}" alt="photo de l'equipe">
 
 {#INTRO #}
     <div class="row  justify-content-center align-items-center col-12 col-md-12  pt-4">
@@ -17,11 +17,11 @@
 
 
 {#evenement#}
-
+<div class="p-2">
     <h3 class="text-center pt-4 px-2">Nos derniers événements  <img class=""width=80px height=80px src="{{ asset('/build/images/calendar1.png')}}" alt="événement"></h3>
     <div class="d-flex justify-content-center">
         
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-3 ">
             <p>Ne ratez plus aucun événement grace a notre page qui recense tout les événements auquel participer!<br>
             vous trouverez tout pleins d'activités, de salon, de meeting sur differents domaine!</p>
             <a class="my-5  btn bouton" href="{{path('app_event_index')}}">Découvrez nos événements</a>
@@ -32,6 +32,8 @@
         </div>
 
     </div>
+    </div>
+
 
 {#avis#}
 

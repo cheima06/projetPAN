@@ -4,56 +4,64 @@
 
 {% block body %}
 
-  {#% include "flash.html.twig" %#} 
+<div class="container mt-5">
+    {#<h3 class="text-center pb-4 title">Mon profil</h3>#}
+    <div class="row flex-column justify-content-center align-items-center">
+        <div class="col-md-4 text-center mb-4">
+            {% if app.user.sexe == 'masculin' %}
+                <img class="img-fluid rounded-circle shadow w-50" src="{{ asset('build/images/homme.png') }}" alt="icone homme">
+            {% elseif app.user.sexe == 'feminin' %}
+                <img class="img-fluid rounded-circle shadow w-50" src="{{ asset('build/images/femme.png') }}" alt="icone femme">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                
+                    <h4 class="mb-0 text-center">Informations du profil</h4>
+                
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="row"><i class="fas fa-user"></i> Nom</th>
+                                <td>{{ app.user.name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="fas fa-user"></i> Prénom</th>
+                                <td>{{ app.user.firstName }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="fas fa-venus-mars"></i> Genre</th>
+                                <td>{{ app.user.sexe }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="fas fa-home"></i> Adresse</th>
+                                <td>{{ app.user.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="fas fa-envelope"></i> Code Postal</th>
+                                <td>{{ app.user.postalCode }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><i class="fas fa-envelope"></i> E-mail</th>
+                                <td>{{ app.user.email }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <div class="d-grid gap-2">
+                        <a class="btn bouton  mb-2" href="{{ path('app_orders_history') }}"><i class="fas fa-shopping-cart"></i> Mes évenements</a>
+                        <a class="btn bouton  mb-2" href="{{ path('app_profile_edit') }}"><i class="fas fa-edit"></i> Modifier informations</a>
+                        <a class="btn bouton  mb-2" href="{{ path('app_profile_password_edit') }}"><i class="fas fa-key"></i> Modifier Mot de passe</a>
+                        <a class="btn btn-danger mb-2" href="{{ path('app_profile_delete') }}"><i class="fas fa-trash-alt"></i> Supprimer mon compte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
- <h3 class="text-center pb-4 title ">Mon profil</h3>
-    <div class="row justify-content-center">
-      <div class="col-md-6 row justify-content-center">
-        {% if app.user.sexe == 'masculin' %}
-          <img class=" img-fluid w-50 " src="{{ asset('build/images/homme.png')}}" alt="icone homme">
-        {% elseif app.user.sexe == 'feminin' %}
-          <img class=" img-fluid w-50 " src="{{ asset('build/images/femme.png')}}" alt="icone femme" >
-        {% endif %}
-
-      </div>
-      <div class="col-md-6 p-5">
-        <table class="table table-hover">
-          <tbody >
-            <tr>
-              <th scope="row">Nom</th>
-              <td>{{app.user.name}} </td>
-            </tr>
-            <tr>
-              <th scope="row">Prénom</th>
-              <td>{{app.user.firstName}}</td>
-            </tr>
-             <tr>
-              <th scope="row">Genre</th>
-              <td>{{app.user.sexe}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Adresse</th>
-              <td>{{app.user.adresse}}</td>
-            </tr>
-            <tr>
-              <th scope="row">Code Postale</th>
-              <td>{{app.user.postalCode}}</td>
-            </tr>
-
-            <tr>
-              <th scope="row">E-mail</th>
-              <td>{{app.user.email}}</td>
-            </tr>
-          </tbody>
-        </table>
-          <a class="btn bouton " href="{{path('app_profile_edit')}}">Modifier informations</a>
-          <a class="btn bouton" href="{{path('app_profile_password_edit')}}">Modifier Mot de passe</a>
-          <a class="btn btn-danger " href="{#{path('app_profile_delete')}#}">Supprimer mon compte </a> 
-          {#% if app.user and 'ROLE_ADMIN' in app.user.getRoles() %}
-             <a class="btn bouton " href="{{path('app_admin')}}">Acceder au profil Admin</a> 
-          {% endif %#}
-      </div>
+        
     </div>
+</div>
 
 {% endblock %}

@@ -39,6 +39,9 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $priceIdStripe = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +139,18 @@ class Event
     public function setCity(string $city): static
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPriceIdStripe(): ?string
+    {
+        return $this->priceIdStripe;
+    }
+
+    public function setPriceIdStripe(string $priceIdStripe): static
+    {
+        $this->priceIdStripe = $priceIdStripe;
 
         return $this;
     }

@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <h1 class="text-center title">Nos événements  <img class="px-4" width="120px" height="100px" src="{{ asset('/build/images/calendar.png')}}" alt="événement"></h1>
+    <h1 class="text-center title">Nos événements!  <img class="px-4" width="120px" height="100px" src="{{ asset('/build/images/calendar.png')}}" alt="événement"></h1>
 
     <div class="col-12">        
 {#barre de recherche #}
@@ -19,7 +19,7 @@
         </div>
         
         {# filtre #}
-        <div class="dropdown">
+        <div class="dropdown mt-3">
         <div class="d-flex flex-column align-items-end px-2">
 
             <button class="btn bouton dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,9 +46,9 @@
             {% for event in events %}
                 <div class="card col-md-4 m-4" style="width: 18rem;">
                         {% if event.picture is empty %} {#grace a twig la fonction asset va creer le bon chemin pour recup les photos#}
-                            <img class="h-50" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
+                            <img height="300" src="{{ asset('/uploads/event/default.webp') }}" alt="{{event.name}}" name="{{event.name}}">
                         {% else %}
-                            <img class="h-50" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
+                            <img height="300" src="{{ asset('/uploads/event/' ~ event.picture)}}" alt="{{event.name}}" name="{{event.name}}">
                         {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{event.name}}</h5>

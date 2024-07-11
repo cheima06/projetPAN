@@ -79,6 +79,7 @@ class HomeController extends AbstractController
 
             return $this->render('event/index.html.twig', [
             'events' => $events,
+            'filter' => null
         ]);
 
         } else {

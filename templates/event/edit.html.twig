@@ -4,22 +4,52 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
+<style>
+    .title2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 2rem;
+    }
+    .btn.bouton {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+    .btn.bouton:hover {
+        background-color: #0056b3;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+    .container {
+        margin-top: 2rem;
+    }
+    .form-container {
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+</style>
 
+<div class="container">
     <h1 class="text-center title2">Modifier l'événement</h1>
     
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 px-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 form-container">
+            {{ include('event/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-                {{ include('event/_form.html.twig', {'button_label': 'mettre à jour'}) }}
-
-                <br>
-                <a class="btn bouton" href="{{ path('app_event_index') }}">retour à la liste</a>
-
-                {{ include('event/_delete_form.html.twig', {'button_label' : 'supprimer'}) }}
-
+            <div class="d-flex justify-content-between mt-3">
+                <a class="btn bouton" href="{{ path('app_event_index') }}">Retour à la liste</a>
+                {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer', 'class': 'btn btn-danger'}) }}
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

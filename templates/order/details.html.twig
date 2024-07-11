@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de vos évenements {{ order.id }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5 col-6">
+        <h1 class="text-center mb-4 title2">Détails de la commande n° {{ order.id }}</h1>
+
+        <h2 class="mb-3">Evenements commandés :</h2>
+        <ul class="list-group">
+            {% for orderDetail in order.orderDetails %}
+                <li class="list-group-item">
+                    <strong>Nom de l'évenement :</strong> {{ orderDetail.product.name }} 
+                </li>
+                <li class="list-group-item">
+                    <strong>Quantité :</strong> {{ orderDetail.quantity }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Date de la commande :</strong> {{ order.date|date('d/m/Y') }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Total :</strong> {{ order.total }} EUR
+                </li>
+                <li class="list-group-item">
+                    <strong>Telechargez mon evenement :<a href="{{asset('uploads/factures/' ~  order.pdf )}}"> <i class="fa-solid fa-download text-dark"></i>  </a> </strong>
+                </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

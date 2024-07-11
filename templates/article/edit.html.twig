@@ -9,15 +9,16 @@
     <h2 class="text-center title2">Modifier Article</h2>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 px-4">
+            <div class="col-12 col-md-6 ">
 
                 {{ include('article/_form.html.twig', {'button_label': 'Enregistrer'}) }}
-                <br>
-                <a class="btn bouton mb-4" href="{{ path('app_article_index') }}">Retour à la liste</a>
+                
+                <a class="btn bouton mt-2 mb-2" href="{{ path('app_article_index') }}">Retour à la liste</a>
                 
                 {{ include('article/_delete_form.html.twig') }}
-                
             </div>
+                
+            
         </div>
 
     </div>

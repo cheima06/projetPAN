@@ -32,6 +32,7 @@ class EventType extends AbstractType
                 ]
                 ])
             ->add('description')
+            
             ->add('city')
             ->add('startAt', null, [
                 'widget' => 'single_text',
@@ -39,6 +40,7 @@ class EventType extends AbstractType
             ->add('endAt', null, [
                 'widget' => 'single_text',
             ])
+            ->add('price_id_stripe')
         ;
     }
 

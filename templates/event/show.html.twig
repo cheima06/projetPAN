@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evénement{% endblock %}
+{% block title %}Événement{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
-    <h3 class="text-center title2 mb-4">Mon Evénement</h3>
+    <h3 class="text-center title2 mb-4">Mon Événement</h3>
 
-    <div class="card mx-auto shadow-sm" style="max-width: 800px;">
+    <div class="card mx-auto shadow-lg" style="max-width: 800px;">
         <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-12 col-md-4">
                 {% if event.picture is empty %}
                     <img src="{{ asset('/uploads/event/default.webp') }}" class="img-fluid rounded-start" alt="{{ event.name }}" title="{{ event.name }}">
                 {% else %}
-                    <img src="{{ asset('/uploads/event/' ~ event.picture)}}" class="img-fluid rounded-start" alt="{{ event.name }}" title="{{ event.name }}">
+                    <img  src="{{ asset('/uploads/event/' ~ event.picture) }}" class="img-fluid rounded-start" alt="{{ event.name }}" title="{{ event.name }}">
                 {% endif %}
             </div>
             <div class="col-md-8">
@@ -22,15 +22,21 @@
                     <p class="card-text"><small class="text-muted">Début : {{ event.startAt ? event.startAt|date('d-m-Y - H:i') : '' }}</small></p>
                     <p class="card-text"><small class="text-muted">Fin : {{ event.endAt ? event.endAt|date('d-m-Y - H:i') : '' }}</small></p>
                     <p class="card-text"><strong>Prix : {{ event.price }} €</strong></p>
-                    <div class="d-flex">
-                        <a class="btn btn-primary" href="{{ path('app_event_index') }}">Retour à la liste</a>
+                    
+                    <div class="d-flex justify-content-between ">
+                        <form action="{{ path('app_cart_add', {'idProduct': event.id}) }}" method="POST" class="">
+                            <button type="submit" class="btn bouton"> Ajouter au panier</button>
+                            
+                        </form>
+
+                        <a class="btn bouton " href="{{ path('app_event_index') }}">Retour à la liste</a>
 
                         {% if app.user and 'ROLE_ADMIN' in app.user.getRoles() %}
-                            <a class="btn btn-secondary " href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+                            <a class="btn bouton" href="{{ path('app_event_edit', {'id': event.id}) }}"> Modifier </a>
+
                             {{ include('event/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
                         {% endif %}
                     </div>
-
                 </div>
             </div>
         </div>

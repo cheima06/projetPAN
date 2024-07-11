@@ -3,83 +3,79 @@
 {% block title %}Nos articles{% endblock %}
 
 {% block body %}
-   
+
 <h1 class="text-center title">
-    Nos derniers articles 
+    Nos derniers articles! 
     <img class="px-4" width="120" height="100" src="{{ asset('/build/images/blog.png') }}" alt="article">
 </h1>
+
 {# BARRE DE RECHERCHE #}
 <div class="col-12">
     <div class="d-flex flex-column align-items-end px-2">
         <h3 class="text-end title2">Rechercher un article</h3>
         <form action="{{ path('app_search_articles') }}" class="col-10 col-md-4 form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mr-sm-2 m-2" name="search" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2 m-2" name="search" type="search" placeholder="Chercher" aria-label="Chercher">
             <button class="btn bouton my-2 my-sm-2" type="submit" aria-label="chercher un article">Chercher</button>
         </form>
     </div>
 
-    {# https://uiverse.io/gharsh11032000/tricky-cheetah-78 #}
-
-{# FILTRE #}
+    {# FILTRE #}
     <div class="dropdown">
-    <div class="d-flex flex-column align-items-end px-2">
-        <button class="btn bouton dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {% if filter == 'ASC' %}
-                Par date croissante
-            {% elseif filter == 'DESC' %}
-                Par date décroissante
-            {% else %}
-                Sélectionner un filtre
-            {% endif %}
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ path('app_article_index', { filter: 'ASC' }) }}">Par date croissante</a></li>
-            <li><a class="dropdown-item" href="{{ path('app_article_index', { filter: 'DESC' }) }}">Par date décroissante</a></li>
-        </ul>
-    </div>
+        <div class="d-flex flex-column align-items-end px-2">
+            <button class="btn bouton dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if filter == 'ASC' %}
+                    Par date croissante
+                {% elseif filter == 'DESC' %}
+                    Par date décroissante
+                {% else %}
+                    Sélectionner un filtre
+                {% endif %}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ path('app_article_index', { filter: 'ASC' }) }}">Par date croissante</a></li>
+                <li><a class="dropdown-item" href="{{ path('app_article_index', { filter: 'DESC' }) }}">Par date décroissante</a></li>
+            </ul>
+        </div>
     </div>
 
-
-    <div class="row justify-content-center col-md-12 border px-2">
-    
+    <div class="row justify-content-center col-md-12 m-4 px-2">
         {% include "flash.html.twig" %}
 
-        <div class="row flex-column justify-content-center align-items-center">
-            {% for article in articles %}
-                <div class="col-md-6">
-                    <div class="d-flex flex-column article p-3 ">
-                            {% if article.photo is empty %}
-                                <img style="max-height:200px;max-width:270px" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{ article.titre }}" title="{{ article.titre }}">
-                            {% else %}
-                                <img style="max-height:200px;max-width:270px" src="{{ asset('/uploads/articles/' ~ article.photo) }}" alt="{{ article.titre }}" title="{{ article.titre }}">
-                            {% endif %}
+        {% for article in articles %}
+            <div class="col-md-5 mb-4 d-flex align-items-stretch">
+                <div class="card">
+                    {% if article.photo is empty %}
+                        <img class="card-img-top" style="max-height:200px; object-fit: cover;" src="{{ asset('/uploads/articles/default.webp') }}" alt="{{ article.titre }}" title="{{ article.titre }}">
+                    {% else %}
+                        <img class="card-img-top" style="max-height:200px; object-fit: cover;" src="{{ asset('/uploads/articles/' ~ article.photo) }}" alt="{{ article.titre }}" title="{{ article.titre }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ article.titre }}</h3>
+                        <p class="card-text">{{ article.date|date('d/m/Y') }}</p>
+                        <p class="card-text">{{ article.description|slice(0, 150) ~ '...' }}</p>
+                        <div class="d-flex  ">
+                        <a class="btn bouton me-2" href="{{ path('app_article_show', { 'id': article.id }) }}">Voir</a>
 
-                        <div class="col-md-6 d-flex flex-column " >
-                            <h3>{{ article.titre }}</h3>
-                            <p>{{ article.date|date('d/m/Y ') }}</p>
-                            <p>{{ article.description|slice(0,150) ~ "..." }}</p>
-
-                            <a class="btn bouton mb-2" href="{{ path('app_article_show', { 'id': article.id }) }}">Voir</a>
-
-                            {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
-                                <a class="btn bouton" href="{{ path('app_article_edit', { 'id': article.id }) }}">Modifier</a>
-                                <a class="btn btn-danger mt-2" href="{{ path('app_article_delete', { 'id': article.id }) }}">Supprimer</a>
-                            {% endif %}
-                        </div>
+                        {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
+                            <a class="btn bouton me-2" href="{{ path('app_article_edit', { 'id': article.id }) }}">Modifier</a>
+                            <a class="btn btn-danger " href="{{ path('app_article_delete', { 'id': article.id }) }}">Supprimer</a>
+                        {% endif %}
                     </div>
+                    </div>
+
                 </div>
-            {% endfor %}
-        </div>
-
-        <div class="navigation col-md-8 d-flex justify-content-center">
-            {{ knp_pagination_render(articles) }}
-        </div>
-
-        {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
-            <div class="row justify-content-center">
-                <a class="my-5 col-md-2 btn bouton" href="{{ path('app_article_new') }}">Créer</a>
             </div>
-        {% endif %}
+        {% endfor %}
     </div>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(articles) }}
+    </div>
+
+    {% if app.user and "ROLE_ADMIN" in app.user.getroles() %}
+        <div class="row justify-content-center">
+            <a class="my-5 col-md-2 btn bouton" href="{{ path('app_article_new') }}">Créer un nouvel article</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

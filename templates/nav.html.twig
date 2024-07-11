@@ -19,6 +19,7 @@
             <li class="nav-item active">
                 <a class="nav-link a" href="{{ path('app_about') }}">A propos de nous</a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link a" href="{{ path('app_prestation') }}">Nos services</a>
             </li>
@@ -50,6 +51,15 @@
                 <a class="nav-link a" href="{{ path('app_register') }}">S'inscrire</a>
             </li>
             {% endif %}
+            <li class="nav-item active">
+                <a class="nav-link a" href="{{ path('app_cart') }}">
+                <i class="fa-solid fa-cart-shopping"></i> 
+                {% if app.session.get('cart') is not null %}
+                    <span id="totalProductInCart" style="position: relative;top: -9px;"> {{app.session.get('cart')['id']|length}}</span>
+                {% endif %}
+                
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

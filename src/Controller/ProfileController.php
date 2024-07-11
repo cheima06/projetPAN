@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Form\ChangePasswordFormType;
 use App\Form\UserType;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -84,6 +86,37 @@ class ProfileController extends AbstractController
             'PasswordForm' => $form,
         ]);
     }
+    
+#[Route("/profil/delete", name:"app_profile_delete")]
+public function delete(EntityManagerInterface $entityManager): RedirectResponse
+{
+    // Récupérer l'utilisateur actuellement connecté
+    $user = $this->getUser();
+
+    // Vérifier si l'utilisateur est connecté
+    if (!$user) {
+        throw $this->createNotFoundException('Utilisateur non trouvé');
+    }
+
+    // Supprimer l'utilisateur
+    $entityManager->remove($user);
+    $entityManager->flush();
+    session_destroy();
+
+    // Redirection vers une page de confirmation ou une autre page
+    return $this->redirectToRoute('app_home'); // Redirige vers la page d'accueil par exemple
+}
+#[Route('/profile/orders', name: 'app_profile_orders')]
+public function history(OrderRepository $orderRepository): Response
+{
+    // Récupérer toutes les commandes de l'utilisateur connecté
+    $user = $this->getUser();
+    $orders = $orderRepository->findBy(['user' => $user], ['date' => 'DESC']);
+
+    return $this->render('profile/index.html.twig', [
+        'orders' => $orders,
+    ]);
+}
 }
 
 
